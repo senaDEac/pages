@@ -1,0 +1,596 @@
+  <settings pass="windowsPE">
+
+    <component name="Microsoft-Windows-Setup" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <ProductKey>
+          <Key>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</Key>
+          <WillShowUI>OnError</WillShowUI>
+        </ProductKey>
+        <AcceptEula>true</AcceptEula>
+        <FullName>Usuário</FullName>
+        <Organization>Organização</Organization>
+      </UserData>
+      <UserAccounts>
+        <AdministratorPassword>
+          <Value></Value>
+          <PlainText>true</PlainText>
+        </AdministratorPassword>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Password>
+              <Value></Value>
+              <PlainText>true</PlainText>
+            </Password>
+            <Description>Local user account</Description>
+            <DisplayName>user</DisplayName>
+            <Group>Administrators</Group>
+            <Name>user</Name>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+      <RunSynchronous>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassDiskCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <!--Disables Windows Defender from Starting -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo WScript.Echo "Scanning for newly created SYSTEM registry hive file to disable Windows Defender services...""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Set fso = CreateObject( "Scripting.FileSystemObject" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Set dic = CreateObject( "Scripting.Dictionary" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>10</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo initialized = false"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>11</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Function Execute( command )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>12</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo "Running command '" + command + "'""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>13</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Set shell = CreateObject( "WScript.Shell" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>14</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Set exec = shell.Exec( command )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>15</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Do While exec.Status = 0"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>16</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo          WScript.Sleep 100"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>17</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Loop"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>18</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo exec.StdOut.ReadAll"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>19</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo exec.StdErr.ReadAll"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>20</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Execute = exec.ExitCode"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>21</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo End Function"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>22</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>23</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     For Each drive In fso.Drives"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>24</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo         If drive.IsReady Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>25</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo             If drive.DriveLetter ^&lt;^&gt; "X" Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>26</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                 For Each folder In Array( "$Windows.~BT\NewOS\Windows", "Windows" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>27</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     file = fso.BuildPath( fso.BuildPath( drive.RootFolder, folder ), "System32\config\SYSTEM" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>28</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     If fso.FileExists( file ) And fso.FileExists( file + ".LOG1" ) And fso.FileExists( file + ".LOG2" ) Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>29</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         If Not initialized Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>30</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             dic.Add file, Nothing"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>31</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         ElseIf Not dic.Exists( file ) Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>32</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Set shell = CreateObject( "WScript.Shell" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>33</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             ret = 1"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>34</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>35</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 WScript.Sleep 500"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>36</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 ret = Execute( "reg.exe LOAD HKLM\mount " + file )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>37</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Loop While ret ^&gt; 0"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>38</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             For Each service In Array( "Sense", "WdBoot", "WdFilter", "WdNisDrv", "WdNisSvc", "WinDefend" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>39</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 ret = Execute( "reg.exe ADD HKLM\mount\ControlSet001\Services\" + service + " /v Start /t REG_DWORD /d 4 /f" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>40</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>41</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             ret = Execute( "reg.exe UNLOAD HKLM\mount" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>42</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             WScript.Echo "Found SYSTEM registry hive file at '" + file + "'. This window will now close.""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>43</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             WScript.Sleep 5000"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>44</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Exit Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>45</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>46</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>47</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                 Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>48</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo             End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>49</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo         End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>50</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>51</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     initialized = true"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>52</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Sleep 1000"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>53</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Loop"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>54</Order>
+          <Path>cmd.exe /c "start /MIN cscript.exe //E:vbscript X:\disable-defender.vbs"</Path>
+        </RunSynchronousCommand>
+        <!--Prevents auto detection of Windows Edition and forces Windows Setup to show all available Editions of Windows during setup.-->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>55</Order>
+          <Path>cmd.exe /c del /f /q X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>56</Order>
+          <Path>cmd.exe /c echo [Channel] > X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>57</Order>
+          <Path>cmd.exe /c echo _Default >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>58</Order>
+          <Path>cmd.exe /c echo [VL] >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>59</Order>
+          <Path>cmd.exe /c echo 0 >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c start /wait powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Setup\Scripts\UWScript.ps1</Path>
+          <Description>Executar script de configuração</Description>
+          <Order>1</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Enable Compact OS</Description>
+          <Order>1</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Ativar CompactOS</Description>
+          <Order>2</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Ativar modo de instalação compact:LZX</Description>
+          <Order>2</Order>
+        </RunSynchronousCommand>
+      </RunSynchronous>
+
+    </component>
+
+    <component name="Microsoft-Windows-Setup" processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <ProductKey>
+          <Key>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</Key>
+          <WillShowUI>OnError</WillShowUI>
+        </ProductKey>
+        <AcceptEula>true</AcceptEula>
+        <FullName>Usuário</FullName>
+        <Organization>Organização</Organization>
+      </UserData>
+      <UserAccounts>
+        <AdministratorPassword>
+          <Value></Value>
+          <PlainText>true</PlainText>
+        </AdministratorPassword>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Password>
+              <Value></Value>
+              <PlainText>true</PlainText>
+            </Password>
+            <Description>Local user account</Description>
+            <DisplayName>user</DisplayName>
+            <Group>Administrators</Group>
+            <Name>user</Name>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+      <RunSynchronous>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassDiskCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <!--Disables Windows Defender from Starting -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo WScript.Echo "Scanning for newly created SYSTEM registry hive file to disable Windows Defender services...""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Set fso = CreateObject( "Scripting.FileSystemObject" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Set dic = CreateObject( "Scripting.Dictionary" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>10</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo initialized = false"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>11</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Function Execute( command )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>12</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo "Running command '" + command + "'""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>13</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Set shell = CreateObject( "WScript.Shell" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>14</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Set exec = shell.Exec( command )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>15</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Do While exec.Status = 0"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>16</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo          WScript.Sleep 100"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>17</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Loop"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>18</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo exec.StdOut.ReadAll"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>19</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Echo exec.StdErr.ReadAll"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>20</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Execute = exec.ExitCode"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>21</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo End Function"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>22</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>23</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     For Each drive In fso.Drives"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>24</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo         If drive.IsReady Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>25</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo             If drive.DriveLetter ^&lt;^&gt; "X" Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>26</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                 For Each folder In Array( "$Windows.~BT\NewOS\Windows", "Windows" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>27</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     file = fso.BuildPath( fso.BuildPath( drive.RootFolder, folder ), "System32\config\SYSTEM" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>28</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     If fso.FileExists( file ) And fso.FileExists( file + ".LOG1" ) And fso.FileExists( file + ".LOG2" ) Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>29</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         If Not initialized Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>30</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             dic.Add file, Nothing"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>31</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         ElseIf Not dic.Exists( file ) Then"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>32</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Set shell = CreateObject( "WScript.Shell" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>33</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             ret = 1"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>34</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>35</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 WScript.Sleep 500"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>36</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 ret = Execute( "reg.exe LOAD HKLM\mount " + file )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>37</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Loop While ret ^&gt; 0"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>38</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             For Each service In Array( "Sense", "WdBoot", "WdFilter", "WdNisDrv", "WdNisSvc", "WinDefend" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>39</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                                 ret = Execute( "reg.exe ADD HKLM\mount\ControlSet001\Services\" + service + " /v Start /t REG_DWORD /d 4 /f" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>40</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>41</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             ret = Execute( "reg.exe UNLOAD HKLM\mount" )"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>42</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             WScript.Echo "Found SYSTEM registry hive file at '" + file + "'. This window will now close.""</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>43</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             WScript.Sleep 5000"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>44</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                             Exit Do"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>45</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                         End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>46</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                     End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>47</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo                 Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>48</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo             End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>49</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo         End If"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>50</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     Next"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>51</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     initialized = true"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>52</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo     WScript.Sleep 1000"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>53</Order>
+          <Path>cmd.exe /c "&gt;&gt;"X:\disable-defender.vbs" echo Loop"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>54</Order>
+          <Path>cmd.exe /c "start /MIN cscript.exe //E:vbscript X:\disable-defender.vbs"</Path>
+        </RunSynchronousCommand>
+        <!--Prevents auto detection of Windows Edition and forces Windows Setup to show all available Editions of Windows during setup.-->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>55</Order>
+          <Path>cmd.exe /c del /f /q X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>56</Order>
+          <Path>cmd.exe /c echo [Channel] > X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>57</Order>
+          <Path>cmd.exe /c echo _Default >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>58</Order>
+          <Path>cmd.exe /c echo [VL] >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>59</Order>
+          <Path>cmd.exe /c echo 0 >> X:\Sources\ei.cfg</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c start /wait powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Setup\Scripts\UWScript.ps1</Path>
+          <Description>Executar script de configuração</Description>
+          <Order>1</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Enable Compact OS</Description>
+          <Order>1</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Ativar CompactOS</Description>
+          <Order>2</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+          <Description>Ativar modo de instalação compact:LZX</Description>
+          <Order>2</Order>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>cmd /c compact /compactos:always</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand>
+          <Order>2</Order>
+          <!-- Disables User Account Control -->
+          <Path>reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <!-- Enables Running of PowerShell Scripts -->
+          <Path>powershell.exe -NoProfile -WindowStyle Hidden -Command "Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force"</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <!-- Skips Forced Micros
